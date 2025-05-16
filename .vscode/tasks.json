@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "GCC: Build Debug app",
+            "type": "shell",
+            "command": [
+                "mkdir ${workspaceFolder}/build ; ",
+                "cd ${workspaceFolder}/build &&",
+                "conan install -b missing -s build_type=Debug .. && ",
+                "conan build -b missing -s build_type=Debug .."
+            ],
+            "presentation": {
+                "clear": true
+            },
+            "hide": false,
+            "group": {
+                "kind": "build"
+            }
+        }
+    ]
+}
