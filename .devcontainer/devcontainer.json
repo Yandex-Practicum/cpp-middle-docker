@@ -4,6 +4,8 @@
         "dockerfile": "./Dockerfile",
         "context": "."
     },
+    "remoteUser": "dev",
+    "postStartCommand": "sudo chown -R dev:dev /workspaces/${localWorkspaceFolderBasename}",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "customizations": {
       "vscode": {
