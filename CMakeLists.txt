@@ -21,6 +21,7 @@ find_package(Boost REQUIRED)
 # find_package(OpenSSL REQUIRED)
 #find_package(SQLite3  REQUIRED)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Создаём исполняемый таргет с одним cpp файлом
 add_executable(${PROJECT_NAME} "${CMAKE_SOURCE_DIR}/main.cpp")
