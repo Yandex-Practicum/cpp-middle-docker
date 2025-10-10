@@ -1,3 +1,22 @@
+# Folders
+*.cache/
+*build/
+.idea/
+.vs/
+
+# Files
 CMakeUserPresets.json
-build
-.cache
+*.swp
+*.swo
+*.user
+*.userossc
+*.log
+*.tmp
+*.bak
+*.old
+
+# Other
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini

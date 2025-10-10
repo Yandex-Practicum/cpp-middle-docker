@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.31.6)
+cmake_minimum_required(VERSION 3.30)
 project(app VERSION 1.0.0 LANGUAGES CXX)
 
 #
@@ -15,32 +15,36 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
 endif()
 
 # Ищем необходимые библиотеки
+find_package(GTest REQUIRED)
 find_package(benchmark REQUIRED)
 find_package(absl REQUIRED)
 find_package(Boost REQUIRED)
-# find_package(OpenSSL REQUIRED)
-#find_package(SQLite3  REQUIRED)
+find_package(OpenSSL REQUIRED)
+find_package(SQLite3  REQUIRED)
+find_package(range-v3 REQUIRED)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+#
+# Создаём библиотеку, в которую добавляются все используемые внутренние и внешние зависимости.
+# Такой подход удобен тем, что позволяет собрать все нужные зависимости в одном месте и затем подключать эту библиотеку как к основному приложению, так и к тестам.
+#
+set (target_impl ${PROJECT_NAME}_impl)
+add_library(${target_impl} INTERFACE)
 
-# Создаём исполняемый таргет с одним cpp файлом
-add_executable(${PROJECT_NAME} "${CMAKE_SOURCE_DIR}/main.cpp")
+# Линкуем к ней сторонние библиотеки
+target_link_libraries(${target_impl}
+    INTERFACE
+        abseil::abseil
+        boost::boost
+        openssl::openssl
+        SQLite::SQLite3
+        range-v3::range-v3)
 
 
 # Указываем пути до include папок сторонних библиотек
-target_include_directories(${PROJECT_NAME} PUBLIC
-    ${benchmark_INCLUDE_DIRS}
-    ${absl_INCLUDE_DIRS}
-    ${Boost_INCLUDE_DIRS}
-    # ${OPENSSL_INCLUDE_DIR}
-    # ${SQLite3_INCLUDE_DIR}
-)
+# BUILD_INTERFACE автоматически подключает include-пути всех библиотек, указанных в target_link_libraries
+target_include_directories(${target_impl}
+    INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 
-# Линкуем к нему сторонние библиотеки
-target_link_libraries(${PROJECT_NAME} PRIVATE 
-    benchmark::benchmark_main
-    abseil::abseil
-    boost::boost
-    # openssl::openssl
-    # SQLite::SQLite3
-)
+# Добавляем сборку CMakeLists.txt из папки src
+add_subdirectory(src)

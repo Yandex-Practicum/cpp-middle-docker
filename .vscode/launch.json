@@ -7,11 +7,31 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug",
-            "program": "${workspaceFolder}/build/app",
+            "name": "Launch Debug app",
+            "program": "${workspaceFolder}/build/src/app",
             "args": [],
             "cwd": "${workspaceFolder}",
-            "preLaunchTask": "GCC: Build Debug app",
+            "preLaunchTask": "GCC: Build Debug",
+            "initCommands": ["settings set target.disable-aslr false"]
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Launch Debug unit_tests",
+            "program": "${workspaceFolder}/build/src/unit_tests",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "GCC: Build Debug",
+            "initCommands": ["settings set target.disable-aslr false"]
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Launch Release benchmark_tests",
+            "program": "${workspaceFolder}/build/src/benchmark_tests",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "GCC: Build Release",
             "initCommands": ["settings set target.disable-aslr false"]
         }
     ]

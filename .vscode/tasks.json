@@ -2,13 +2,28 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "GCC: Build Debug app",
+            "label": "GCC: Build Debug",
             "type": "shell",
             "command": [
                 "mkdir ${workspaceFolder}/build ; ",
                 "cd ${workspaceFolder}/build &&",
-                "conan install -b missing -s build_type=Debug .. && ",
                 "conan build -b missing -s build_type=Debug .."
+            ],
+            "presentation": {
+                "clear": true
+            },
+            "hide": false,
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "GCC: Build Release",
+            "type": "shell",
+            "command": [
+                "mkdir ${workspaceFolder}/build ; ",
+                "cd ${workspaceFolder}/build &&",
+                "conan build -b missing -s build_type=Release .."
             ],
             "presentation": {
                 "clear": true
