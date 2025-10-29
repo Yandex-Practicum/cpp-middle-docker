@@ -23,6 +23,24 @@ find_package(OpenSSL REQUIRED)
 find_package(SQLite3  REQUIRED)
 find_package(range-v3 REQUIRED)
 
+# Библиотека nvidia/stdexec распространяется с использованием CPM
+include(FetchContent)
+FetchContent_Declare(
+  CPM
+  GIT_REPOSITORY https://github.com/cpm-cmake/CPM.cmake
+  GIT_TAG origin/master
+)
+FetchContent_MakeAvailable(CPM)
+
+CPMAddPackage(
+    NAME stdexec
+    GITHUB_REPOSITORY NVIDIA/stdexec
+    GIT_TAG main
+    OPTIONS
+        "STDEXEC_BUILD_EXAMPLES OFF"
+        "STDEXEC_BUILD_TESTS OFF"
+)
+
 #
 # Создаём библиотеку, в которую добавляются все используемые внутренние и внешние зависимости.
 # Такой подход удобен тем, что позволяет собрать все нужные зависимости в одном месте и затем подключать эту библиотеку как к основному приложению, так и к тестам.
@@ -33,6 +51,7 @@ add_library(${target_impl} INTERFACE)
 # Линкуем к ней сторонние библиотеки
 target_link_libraries(${target_impl}
     INTERFACE
+        STDEXEC::stdexec
         abseil::abseil
         boost::boost
         openssl::openssl

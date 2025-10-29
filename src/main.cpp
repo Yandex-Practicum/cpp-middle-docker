@@ -1,9 +1,9 @@
-
 #include <absl/strings/str_cat.h>
 #include <boost/algorithm/string.hpp>
 #include <openssl/sha.h>
 #include <range/v3/all.hpp>
 #include <sqlite3.h>
+#include <stdexec/execution.hpp>
 
 #include <array>
 #include <flat_set>
@@ -58,6 +58,10 @@ int main() {
             std::print("{} ", n);
         std::println("");
     }
+
+    std::println("\n\n#################### Test stdexec ####################");
+    auto [sender_res] = stdexec::sync_wait(stdexec::just(42)).value();
+    std::println("Sender model execution resuls: {}", sender_res);
 
     std::println("\n\nAll libraries appear functional. Enjoy!\n");
     return 0;

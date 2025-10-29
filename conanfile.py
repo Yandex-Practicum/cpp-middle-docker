@@ -18,7 +18,7 @@ class CppMiddleCourseConanFile(ConanFile):
         self.requires("benchmark/1.9.1")
         self.requires("gtest/1.13.0")
         self.requires("abseil/20250127.0")
-        self.requires("boost/1.83.0")
+        self.requires("boost/1.88.0")
         self.requires("openssl/3.1.1")
         self.requires("sqlite3/3.49.1")
         self.requires("range-v3/0.12.0")
