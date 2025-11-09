@@ -50,6 +50,16 @@ source ~/.bashrc
 printf "\nUSER_UID=${USER_UID=}\nUSER_GID=${USER_GID}\n\n"
 ```
 
+После этого убедитесь, что у вас установлен git (папка `~/.gitconfig` существует) и существует папка `~/.conan2`
+
+```bash
+#
+# Создать файл ~/.gitconfig и папку ~/.conan2
+#
+touch ~/.gitconfig
+mkdir ~/.conan2
+```
+
 ## Начало работы
 
 1. Убедитесь, что переменные окружения из предыдущего шага доступны внутри вашей IDE
